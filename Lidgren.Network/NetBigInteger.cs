@@ -2265,21 +2265,21 @@ namespace Lidgren.Network
 		public static NetBigInteger ValueOf(
 			long value)
 		{
-			switch (value)
-			{
-				case 0:
-					return Zero;
-				case 1:
-					return One;
-				case 2:
-					return Two;
-				case 3:
-					return Three;
-				case 10:
-					return Ten;
-			}
-
-			return createValueOf(value);
+            switch (value)
+            {
+                case 0:
+                    return Zero;
+                case 1:
+                    return One;
+                case 2:
+                    return Two;
+                case 3:
+                    return Three;
+                case 10:
+                    return Ten;
+                default:
+                    return createValueOf(value);
+            }
 		}
 
 		public int GetLowestSetBit()

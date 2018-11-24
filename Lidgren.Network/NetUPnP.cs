@@ -158,8 +158,9 @@ namespace Lidgren.Network
 					if (NetTime.Now > m_discoveryResponseDeadline)
 						m_status = UPnPStatus.NotAvailable;
 					return false;
+			    default:
+			        return false;
 			}
-			return false;
 		}
 
 		/// <summary>

@@ -54,7 +54,9 @@ namespace Lidgren.Network
 						// let disconnect finish first
 						break;
 
-					case NetConnectionStatus.None:
+				    case NetConnectionStatus.ReceivedInitiation:
+				    case NetConnectionStatus.RespondedAwaitingApproval:
+				    case NetConnectionStatus.None:
 					default:
 						SendConnect(now);
 						break;
@@ -84,7 +86,10 @@ namespace Lidgren.Network
 						// awaiting approval
 						m_lastHandshakeSendTime = now; // postpone handshake resend
 						break;
-					case NetConnectionStatus.None:
+				    case NetConnectionStatus.Connected:
+				    case NetConnectionStatus.Disconnecting:
+				    case NetConnectionStatus.Disconnected:
+				    case NetConnectionStatus.None:
 					case NetConnectionStatus.ReceivedInitiation:
 					default:
 						m_peer.LogWarning("Time to resend handshake, but status is " + m_status);
@@ -363,6 +368,9 @@ namespace Lidgren.Network
 							InitializePing();
 							SetStatus(NetConnectionStatus.Connected, "Connected to " + NetUtility.ToHexString(m_remoteUniqueIdentifier));
 							return;
+					    case NetConnectionStatus.RespondedAwaitingApproval:
+					    default:
+					        throw new ArgumentOutOfRangeException();
 					}
 					break;
 
@@ -392,7 +400,51 @@ namespace Lidgren.Network
 					// silently ignore
 					return;
 
-				default:
+			    case NetMessageType.Unconnected:			    case NetMessageType.UserUnreliable:			    case NetMessageType.UserSequenced1:			    case NetMessageType.UserSequenced2:			    case NetMessageType.UserSequenced3:			    case NetMessageType.UserSequenced4:			    case NetMessageType.UserSequenced5:			    case NetMessageType.UserSequenced6:			    case NetMessageType.UserSequenced7:			    case NetMessageType.UserSequenced8:			    case NetMessageType.UserSequenced9:			    case NetMessageType.UserSequenced10:			    case NetMessageType.UserSequenced11:			    case NetMessageType.UserSequenced12:			    case NetMessageType.UserSequenced13:			    case NetMessageType.UserSequenced14:			    case NetMessageType.UserSequenced15:			    case NetMessageType.UserSequenced16:			    case NetMessageType.UserSequenced17:			    case NetMessageType.UserSequenced18:			    case NetMessageType.UserSequenced19:			    case NetMessageType.UserSequenced20:			    case NetMessageType.UserSequenced21:			    case NetMessageType.UserSequenced22:			    case NetMessageType.UserSequenced23:			    case NetMessageType.UserSequenced24:			    case NetMessageType.UserSequenced25:			    case NetMessageType.UserSequenced26:			    case NetMessageType.UserSequenced27:			    case NetMessageType.UserSequenced28:			    case NetMessageType.UserSequenced29:			    case NetMessageType.UserSequenced30:			    case NetMessageType.UserSequenced31:			    case NetMessageType.UserSequenced32:			    case NetMessageType.UserReliableUnordered:			    case NetMessageType.UserReliableSequenced1:			    case NetMessageType.UserReliableSequenced2:			    case NetMessageType.UserReliableSequenced3:			    case NetMessageType.UserReliableSequenced4:			    case NetMessageType.UserReliableSequenced5:			    case NetMessageType.UserReliableSequenced6:			    case NetMessageType.UserReliableSequenced7:			    case NetMessageType.UserReliableSequenced8:			    case NetMessageType.UserReliableSequenced9:			    case NetMessageType.UserReliableSequenced10:			    case NetMessageType.UserReliableSequenced11:			    case NetMessageType.UserReliableSequenced12:			    case NetMessageType.UserReliableSequenced13:			    case NetMessageType.UserReliableSequenced14:			    case NetMessageType.UserReliableSequenced15:			    case NetMessageType.UserReliableSequenced16:			    case NetMessageType.UserReliableSequenced17:			    case NetMessageType.UserReliableSequenced18:			    case NetMessageType.UserReliableSequenced19:			    case NetMessageType.UserReliableSequenced20:			    case NetMessageType.UserReliableSequenced21:			    case NetMessageType.UserReliableSequenced22:			    case NetMessageType.UserReliableSequenced23:			    case NetMessageType.UserReliableSequenced24:			    case NetMessageType.UserReliableSequenced25:			    case NetMessageType.UserReliableSequenced26:			    case NetMessageType.UserReliableSequenced27:			    case NetMessageType.UserReliableSequenced28:			    case NetMessageType.UserReliableSequenced29:			    case NetMessageType.UserReliableSequenced30:			    case NetMessageType.UserReliableSequenced31:			    case NetMessageType.UserReliableSequenced32:			    case NetMessageType.UserReliableOrdered1:			    case NetMessageType.UserReliableOrdered2:			    case NetMessageType.UserReliableOrdered3:			    case NetMessageType.UserReliableOrdered4:			    case NetMessageType.UserReliableOrdered5:			    case NetMessageType.UserReliableOrdered6:			    case NetMessageType.UserReliableOrdered7:			    case NetMessageType.UserReliableOrdered8:			    case NetMessageType.UserReliableOrdered9:			    case NetMessageType.UserReliableOrdered10:			    case NetMessageType.UserReliableOrdered11:			    case NetMessageType.UserReliableOrdered12:			    case NetMessageType.UserReliableOrdered13:			    case NetMessageType.UserReliableOrdered14:			    case NetMessageType.UserReliableOrdered15:			    case NetMessageType.UserReliableOrdered16:			    case NetMessageType.UserReliableOrdered17:			    case NetMessageType.UserReliableOrdered18:			    case NetMessageType.UserReliableOrdered19:			    case NetMessageType.UserReliableOrdered20:			    case NetMessageType.UserReliableOrdered21:			    case NetMessageType.UserReliableOrdered22:			    case NetMessageType.UserReliableOrdered23:			    case NetMessageType.UserReliableOrdered24:			    case NetMessageType.UserReliableOrdered25:			    case NetMessageType.UserReliableOrdered26:			    case NetMessageType.UserReliableOrdered27:
+			    case NetMessageType.UserReliableOrdered28:
+			    case NetMessageType.UserReliableOrdered29:
+			    case NetMessageType.UserReliableOrdered30:
+			    case NetMessageType.UserReliableOrdered31:
+			    case NetMessageType.UserReliableOrdered32:
+			    case NetMessageType.Unused1:
+			    case NetMessageType.Unused2:
+			    case NetMessageType.Unused3:
+			    case NetMessageType.Unused4:
+			    case NetMessageType.Unused5:
+			    case NetMessageType.Unused6:
+			    case NetMessageType.Unused7:
+			    case NetMessageType.Unused8:
+			    case NetMessageType.Unused9:
+			    case NetMessageType.Unused10:
+			    case NetMessageType.Unused11:
+			    case NetMessageType.Unused12:
+			    case NetMessageType.Unused13:
+			    case NetMessageType.Unused14:
+			    case NetMessageType.Unused15:
+			    case NetMessageType.Unused16:
+			    case NetMessageType.Unused17:
+			    case NetMessageType.Unused18:
+			    case NetMessageType.Unused19:
+			    case NetMessageType.Unused20:
+			    case NetMessageType.Unused21:
+			    case NetMessageType.Unused22:
+			    case NetMessageType.Unused23:
+			    case NetMessageType.Unused24:
+			    case NetMessageType.Unused25:
+			    case NetMessageType.Unused26:
+			    case NetMessageType.Unused27:
+			    case NetMessageType.Unused28:
+			    case NetMessageType.Unused29:
+			    case NetMessageType.LibraryError:
+			    case NetMessageType.Pong:
+			    case NetMessageType.Acknowledge:
+			    case NetMessageType.NatPunchMessage:
+			    case NetMessageType.NatIntroduction:
+			    case NetMessageType.NatIntroductionConfirmRequest:
+			    case NetMessageType.NatIntroductionConfirmed:
+			    case NetMessageType.ExpandMTURequest:
+			    case NetMessageType.ExpandMTUSuccess:
+			    default:
 					m_peer.LogDebug("Unhandled type during handshake: " + tp + " length: " + payloadLength);
 					break;
 			}
@@ -436,6 +488,9 @@ namespace Lidgren.Network
 					// my ConnectionEstablished must have been lost, send another one
 					SendConnectionEstablished();
 					return;
+			    case NetConnectionStatus.RespondedAwaitingApproval:
+			    default:
+			        throw new ArgumentOutOfRangeException();
 			}
 		}
 
