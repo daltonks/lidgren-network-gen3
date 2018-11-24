@@ -326,7 +326,13 @@ namespace Lidgren.Network
 							// send another response
 							hs.SendConnectResponse(NetTime.Now, false);
 							break;
-						default:
+					    case NetConnectionStatus.None:
+					    case NetConnectionStatus.ReceivedInitiation:
+					    case NetConnectionStatus.RespondedAwaitingApproval:
+					    case NetConnectionStatus.Connected:
+					    case NetConnectionStatus.Disconnecting:
+					    case NetConnectionStatus.Disconnected:
+					    default:
 							// weird
 							LogWarning("Weird situation; Connect() already in progress to remote endpoint; but hs status is " + hs.m_status);
 							break;
